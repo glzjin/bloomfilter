@@ -4,6 +4,8 @@ from netease import Artist
 
 
 def get_songs():
+    songs = []
+
     # pull all data from netease music
     singers = ['周杰伦', '宋祖英', '羽泉', '郁钧剑', '赵本山']
 
@@ -11,8 +13,9 @@ def get_songs():
         songs = Artist.Artist(singer).songs()
         print(songs)
         for song in songs:
-            print(song)
-            database.insert(song)
+            songs.append(song)
+
+    return songs
 
 
 def create_bloom_filter(mod_number, datas):
@@ -26,7 +29,10 @@ def create_bloom_filter(mod_number, datas):
 if __name__ == "__main__":
     database = Database.DataBase(host="localhost", database="test1124", user="postgres", password="miaomiaomiao")
 
-    # get_songs()
+    # Get songs
+    # songs = get_songs()
+    # for song in songs:
+    #     database.insert(song)
 
     # and pull all things we get to memory
     datas = database.pull_all()
